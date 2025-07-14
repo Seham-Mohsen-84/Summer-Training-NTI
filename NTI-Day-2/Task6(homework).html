@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task6(homework)</title>
+    <style>
+        .nav{
+            background: #bacbe6;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .nav ul{
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin: 0;
+            padding: 10px 10px;
+        }
+        .nav ul li a{
+            color: #8bb9fe;
+            text-decoration: #d63384;
+            font-weight: bolder;
+            padding: 8px 10px;
+            border-radius: 4px;
+            transition: background ,3ms all ease-in-out;
+        }
+        .nav ul li a {
+            background-color: #2b3035;
+        }
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            font-family: "Calibri Light";
+            background-color: lavender;
+            padding: 30px;
+        }
+        .log-form{
+            background-color: #cfe2ff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #2b3035;
+        }
+        input,textarea,select,button{
+            width: 100%;
+            padding: 20px;
+            margin-top: 10px;
+            border: 1px solid #bacbe6;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<nav class="nav">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">courses</a></li>
+        <li><a href="#">content</a></li>
+
+    </ul>
+</nav>
+<form
+        action="submit.php"
+        method="post"
+        class="log-form">
+
+    <!-- start the first input with its label -->
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="fullname" class="form-input"/>
+    <!-- end the first input with its label -->
+
+    <!-- start the second input with its label -->
+    <label for="email" >Email:</label>
+    <input type="email" id="email" name="email" class="form-input"/>
+    <!-- end the second input with its label -->
+
+    <!-- start the select with its label -->
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" class="form-input">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+    <!-- end the select input with its label -->
+
+    <!-- start the textarea with its label -->
+    <label for="message">Message:</label>
+    <textarea   class="form-input"
+                id="message"
+                name="message"
+                rows="4"
+                cols="30"></textarea>
+    <!-- end the textarea with its label -->
+
+    <button type="submit" class="form-input" >send data</button>
+</form>
+</body>
+</html>
