@@ -1,3 +1,23 @@
+<?php
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
+    header("Location: Sign-In.php");
+    exit();
+}
+$productName = "";
+$description = "";
+$imageName = "";
+$uploadDir = "uploads/";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES['product_image'])) {
+    $productName = $_POST['product_name'];
+    $description = $_POST['description'];
+    $imageName = $_FILES['product_image']['name'];
+    $imageTmp = $_FILES['product_image']['tmp_name'];
+
+    move_uploaded_file($imageTmp, $uploadDir . $imageName);
+}
+?>
 <!Doctype html>
 <html lang="en">
 <head>
@@ -41,15 +61,7 @@
     </div>
 
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['product_image'])) {
-        $productName = $_POST['product_name'];
-        $description = $_POST['description'];
-        $imageName = $_FILES['product_image']['name'];
-        $imageTmp = $_FILES['product_image']['tmp_name'];
-        $uploadDir = "uploads/";
-
-        move_uploaded_file($imageTmp, $uploadDir.$imageName);
-        ?>
+    if (($productName) && ($imageName)):?>
 
         <div class="row mt-4 d-flex justify-content-center">
             <div class="col-md-4">
@@ -62,8 +74,7 @@
                 </div>
             </div>
         </div>
-
-    <?php } ?>
+    <?php endif; ?>
 </div>
 
 <script src="../NTI-Day-1/js/bootstrap.bundle.js"></script>

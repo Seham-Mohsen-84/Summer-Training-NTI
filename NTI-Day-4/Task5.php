@@ -12,7 +12,7 @@ $array=[
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../NTI-Day-1/css/bootstrap.css" rel="stylesheet">
-    <title>Task2</title>
+    <title>Task5</title>
 </head>
 <body class="bg-dark-subtle text-black">
 <div class="container">
