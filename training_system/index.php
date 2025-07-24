@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!Doctype html>
 <html lang="en">
 <head>

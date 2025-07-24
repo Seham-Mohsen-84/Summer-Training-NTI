@@ -17,5 +17,15 @@
                 </li>
             </ul>
         </div>
+
+        <form class="d-flex align-items-center gap-3">
+            <?php if($_SESSION['role'] == 1): ?>
+            <label class="form-control btn btn-light text-primary">Admin</label>
+            <?php else:?>
+            <label class="form-control btn bg-light text-primary">Student</label>
+            <?php endif;?>
+            <a href="../logout.php" class="btn btn-outline-primary">Logout</a>
+        </form>
+
     </div>
 </nav>

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <!Doctype html>
 <html lang="en">
 <head>
@@ -21,7 +28,9 @@
                     <th>Title</th>
                     <th>Grade</th>
                     <th>Enrollment_date</th>
+                    <?php if($_SESSION['role'] == 1): ?>
                     <th>Action</th>
+                    <?php endif; ?>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,13 +48,15 @@
                             <td><?php echo  $row["name"] ?></td>
                             <td><?php echo  $row["title"] ?></td>
                             <td><?php echo  $row["grade"] ?></td>
-                            <td><?php echo  $row["enrollment_date"] ?></td>
+                            <td><?php echo  $row["enrollment_date"] ?></td>\
+                            <?php if($_SESSION['role'] == 1): ?>
                             <td>
                                 <div class="d-grid gap-2 d-md-block">
                                     <a href="edit_enrollment.php?id=<?= $row['id'] ?>" class="btn btn-warning">Edit</a>
                                     <a href="delete_enrollment.php?id=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endwhile; ?>
                 <?php endif ; ?>

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <!Doctype html>
 <html lang="en">
 <head>
@@ -12,7 +19,9 @@
 <div class="container">
     <div class="row mt-5 d-flex ">
         <h3>Course List</h3>
+        <?php if($_SESSION['role'] == 1): ?>
         <span><a class="btn btn-outline-primary" href="add_course.php">+Add Courses</a></span>
+        <?php endif; ?>
         <div class="col">
             <table class="table table-striped table-hover">
                 <thead>
@@ -21,7 +30,9 @@
                     <th>Description</th>
                     <th>Hours</th>
                     <th>Price</th>
+                    <?php if($_SESSION['role'] == 1): ?>
                     <th>Action</th>
+                    <?php endif; ?>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,12 +46,14 @@
                             <td><?php echo  $row["description"] ?></td>
                             <td><?php echo  $row["hours"] ?></td>
                             <td><?php echo  $row["price"] ?></td>
+                            <?php if($_SESSION['role'] == 1): ?>
                             <td>
                                 <div class="d-grid gap-2 d-md-block">
                                     <a href="edit_course.php?id=<?= $row['id'] ?>" class="btn btn-warning">Edit</a>
                                     <a href="delete_course.php?id=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endwhile; ?>
                 <?php endif ; ?>

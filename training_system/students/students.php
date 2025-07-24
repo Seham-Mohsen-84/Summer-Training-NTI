@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <!Doctype html>
 <html lang="en">
 <head>
@@ -12,7 +19,9 @@
 <div class="container">
     <div class="row mt-5 d-flex ">
         <h3>Student List</h3>
+        <?php if($_SESSION['role'] == 1): ?>
         <span><a class="btn btn-outline-primary" href="add_student.php">+Add Student</a></span>
+        <?php endif; ?>
         <div class="col">
             <table class="table table-striped table-hover">
                 <thead>
@@ -21,13 +30,15 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Date_of_birth</th>
+                    <?php if($_SESSION['role'] == 1): ?>
                     <th>Action</th>
+                    <?php endif; ?>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                 $sql = "SELECT * FROM students";
-                $result = $conn->query($sql);
+                $result = mysqli_query($conn, $sql);
                 if ($result->num_rows > 0) :
                     while($row = $result->fetch_assoc()) :?>
                 <tr>
@@ -35,12 +46,14 @@
                     <td><?php echo  $row["email"] ?></td>
                     <td><?php echo  $row["phone"] ?></td>
                     <td><?php echo  $row["date_of_birth"] ?></td>
+                    <?php if($_SESSION['role'] == 1): ?>
                     <td>
                         <div class="d-grid gap-2 d-md-block">
                             <a href="edit_student.php?id=<?= $row['id'] ?>" class="btn btn-warning">Edit</a>
                             <a href="delete_student.php?id=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
                         </div>
                     </td>
+                    <?php endif; ?>
                 </tr>
                 <?php endwhile; ?>
                 <?php endif ; ?>
