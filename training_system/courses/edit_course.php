@@ -23,11 +23,13 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
         $price = $_POST['price'];
 
         $sql = "UPDATE courses 
-            SET title='$title', description='$description', hours='$hours', price='$price' 
-            WHERE id=$id";
+            SET title=?, description=?, hours=?, price=? 
+            WHERE id=?";
+        $stmt = mysqli_prepare($conn, $sql);
 
-        if ($conn->query($sql) === TRUE) {
-            mysqli_query($conn,$sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "ssiii", $title, $description, $hours, $id, $price);
+            mysqli_stmt_execute($stmt);
             header("Location: courses.php");
             exit();
         } else {
@@ -41,7 +43,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
         exit();
     }
 
-    $result = mysqli_query($conn, "SELECT * FROM courses WHERE id = '$id'");
+    $sql1="SELECT * FROM courses WHERE id=?";
+    $stmt1=mysqli_prepare($conn,$sql1);
+    mysqli_stmt_bind_param($stmt1, "i", $id);
+    mysqli_stmt_execute($stmt1);
+    $result = mysqli_stmt_get_result($stmt1);
     $courses = mysqli_fetch_assoc($result);
     ?>
 
@@ -50,7 +56,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
 <div class="container">
     <div class="row mt-5 d-flex ">
         <div class="col">
-            <h3>Add New Student</h3>
+            <h3>Edit Course</h3>
             <div class="card text-center">
                 <div class="card-body was-validated">
                     <form class="row g-3" action="" method="post">

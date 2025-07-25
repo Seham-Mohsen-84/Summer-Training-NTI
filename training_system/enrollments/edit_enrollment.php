@@ -22,9 +22,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
         exit();
     }
     $sql="SELECT e.id, e.student_id, e.course_id, e.grade, e.enrollment_date 
-      FROM enrollments AS e WHERE e.id = $id";
-
-    $result = mysqli_query($conn, $sql);
+      FROM enrollments AS e WHERE e.id = ?";
+    $stmt=mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result=mysqli_stmt_get_result($stmt);
     $enrollments = mysqli_fetch_assoc($result);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
@@ -34,10 +36,13 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
         $enrollment_date = $_POST['enrollment_date'];
 
         $sql = "UPDATE enrollments 
-            SET student_id='$student_id', course_id='$course_id', grade='$grade', enrollment_date='$enrollment_date' 
-            WHERE id=$id";
+            SET student_id=?, course_id=?, grade=?, enrollment_date=?
+            WHERE id=?";
+        $stmt=mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "iiisi", $student_id, $course_id, $grade, $enrollment_date, $id);
+        $result=mysqli_stmt_execute($stmt);
 
-        if ($conn->query($sql) === TRUE) {
+        if ($result) {
             header("Location: enrollments.php");
             exit();
         } else {

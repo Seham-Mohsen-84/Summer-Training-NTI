@@ -22,8 +22,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
         $dob = $_POST['dob'] ?? null;
 
         if ($name && $email && $phone && $dob) {
-            $sql = "INSERT INTO students(name, email, phone, date_of_birth) VALUES ('$name', '$email', '$phone', '$dob')";
-            if ($conn->query($sql) === TRUE) {
+            $sql = "INSERT INTO students(name, email, phone, date_of_birth) VALUES (?, ?, ?, ?)";
+            $stmt=mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $phone, $dob);
+            $result = mysqli_stmt_execute($stmt);
+            if ($result) {
                 echo "<div class='alert alert-success text-center'>Student Added Successfully!</div>";
             } else {
                 echo "<div class='alert alert-danger text-center'>Error: " . $conn->error . "</div>";

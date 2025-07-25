@@ -13,8 +13,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'
     $password = $_POST['password'];
     $hpassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO admin (user_name,email,password) values ('$name','$email','$hpassword') ";
-    $result = mysqli_query($conn, $sql);
+    $sql = "INSERT INTO admin (user_name,email,password) values (?,?,?) ";
+    $stmt =mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "sss", $name, $email, $hpassword);
+    $result = mysqli_stmt_execute($stmt);
+
     if ($result) {
         $successmessage = "Account Created Successfully";
         header("Location: login.php");

@@ -22,8 +22,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
         $price = $_POST['price'] ?? null;
 
         if ($title && $description && $hours && $price ) {
-            $sql = "INSERT INTO courses(title, description, hours, price) VALUES ('$title', '$description', '$hours', '$price')";
-            if ($conn->query($sql) === TRUE) {
+            $sql = "INSERT INTO courses(title, description, hours, price) VALUES (?, ?, ?, ?)";
+            $stmt =mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, "ssss", $title, $description, $hours, $price);
+            $result = mysqli_stmt_execute($stmt);
+            if ($result) {
                 echo "<div class='alert alert-success text-center'>Course Added Successfully!</div>";
             } else {
                 echo "<div class='alert alert-danger text-center'>Error: " . $conn->error . "</div>";

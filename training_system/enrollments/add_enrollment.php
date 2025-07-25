@@ -24,8 +24,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
 
         if ($student_id && $course_id && $grade && $enrollment_date) {
             $sql = "INSERT INTO enrollments(student_id, course_id, grade, enrollment_date)
-                VALUES ('$student_id', '$course_id', '$grade', '$enrollment_date')";
-            if ($conn->query($sql) === TRUE) {
+                VALUES (?, ?, ?, ?)";
+            $stmt=mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, "iiis", $student_id, $course_id, $grade, $enrollment_date);
+           $result= mysqli_stmt_execute($stmt);
+            if ($result) {
                 echo "<div class='alert alert-success text-center'>Enrollment Added Successfully!</div>";
             } else {
                 echo "<div class='alert alert-danger text-center'>Error: " . $conn->error . "</div>";
