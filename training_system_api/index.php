@@ -13,7 +13,6 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
     <link href="../NTI-Day-1/css/bootstrap.css" rel="stylesheet">
     <title>Index</title>
     <?php include_once "public/navbar.php"; ?>
-    <?php include_once "db/db.php"; ?>
 </head>
 <body class="bg-light text-black">
 <div class="container">
@@ -23,19 +22,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Students</h5>
-                        <p class="card-text">total students :
-                            <?php
-                            $sql = "SELECT id FROM students";
-                            $result = mysqli_query($conn, $sql);
-
-                            if ($result) {
-                                $numrows = mysqli_num_rows($result);
-                                echo $numrows;
-                            } else {
-                                echo "Error: " . mysqli_error($conn);
-                            }
-                            ?>
-                        </p>
+                        <p class="card-text">total students : <strong id="students-count">0</strong></p>
                         <a href="students/students.php" class="btn btn-outline-success">View Students</a>
                     </div>
                 </div>
@@ -44,19 +31,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Courses</h5>
-                        <p class="card-text">total courses :
-                            <?php
-                            $sql1 = "SELECT id FROM courses";
-                            $result1 = mysqli_query($conn, $sql1);
-
-                            if ($result1) {
-                                $numrows1 = mysqli_num_rows($result1);
-                                echo $numrows1;
-                            } else {
-                                echo "Error: " . mysqli_error($conn);
-                            }
-                            ?>
-                        </p>
+                        <p class="card-text">total courses : <strong id="courses-count">0</strong></p>
                         <a href="courses/courses.php" class="btn btn-outline-primary">View Course</a>
                     </div>
                 </div>
@@ -65,19 +40,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Enrollments</h5>
-                        <p class="card-text">total enrollment :
-                            <?php
-                            $sql2 = "SELECT id FROM enrollments";
-                            $result2 = mysqli_query($conn, $sql2);
-
-                            if ($result2) {
-                                $numrows2 = mysqli_num_rows($result2);
-                                echo $numrows2;
-                            } else {
-                                echo "Error: " . mysqli_error($conn);
-                            }
-                            ?>
-                        </p>
+                        <p class="card-text">total enrollment : <strong id="enrollments-count">0</strong></p>
                         <a href="enrollments/enrollments.php" class="btn btn-outline-danger">View Enrollments</a>
                     </div>
                 </div>
@@ -85,6 +48,39 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] == 0) {
         </div>
     </div>
 </div>
+
 <script src="../NTI-Day-1/js/bootstrap.bundle.js"></script>
+
+<script>
+
+    fetch('students/api/get.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                document.getElementById("students-count").innerHTML = data.data.length;
+            }
+        })
+        .catch(error => console.log("Error fetching students count:", error));
+
+
+    fetch('courses/api/get.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                document.getElementById("courses-count").innerHTML = data.data.length;
+            }
+        })
+        .catch(error => console.log("Error fetching courses count:", error));
+
+
+    fetch('enrollments/api/get.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                document.getElementById("enrollments-count").innerHTML = data.data.length;
+            }
+        })
+        .catch(error => console.log("Error fetching enrollments count:", error));
+</script>
 </body>
 </html>
