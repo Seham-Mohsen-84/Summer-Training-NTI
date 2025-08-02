@@ -1,0 +1,15 @@
+{
+    "name": "seham/the-end",
+    "autoload": {
+        "psr-4": {
+            "Seham\\TheEnd\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "seham mohsen",
+            "email": "sehammohsen84@gmail.com"
+        }
+    ],
+    "require": {}
+}

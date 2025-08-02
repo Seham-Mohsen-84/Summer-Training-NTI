@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task9</title>
+</head>
+<body>
+<input type="text" id="username" placeholder="Enter your name">
+<input type="number" id="score" placeholder="Enter your score">
+<button onclick="CheckResult()">احسب التقدير</button>
+
+<h1 id="output"></h1>
+
+<script>
+    function CheckResult(){
+        let name = document.getElementById("username").value
+        let degree=document.getElementById("score").value
+
+        if(degree>=90){
+            document.getElementById("output").innerHTML="مرحبا يا "+name +" تقديرك ممتاز";
+        }
+        else if(degree>=80){
+            document.getElementById("output").innerHTML="مرحبا يا "+name +" تقديرك جيد جدا";
+        }
+        else if(degree>=70){
+            document.getElementById("output").innerHTML="مرحبا يا "+name +" تقديرك جيد";
+        }
+        else{
+            document.getElementById("output").innerHTML="مرحبا يا "+name +" تقديرك ضعيف";
+        }
+    }
+</script>
+</body>
+</html>

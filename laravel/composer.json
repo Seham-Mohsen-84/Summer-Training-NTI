@@ -1,0 +1,17 @@
+{
+    "name": "seham/laravel",
+    "autoload": {
+        "psr-4": {
+            "Dompdf\\Dompdf\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "seham"
+        }
+    ],
+    "require": {
+        "dompdf/dompdf": "^3.1",
+        "phpmailer/phpmailer": "^6.10"
+    }
+}

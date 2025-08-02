@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task3-form</title>
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    body{
+        background: lightcyan;
+        min-height: 100vh;
+        padding: 50px 0;
+        margin: 0;
+    }
+    input,textarea,button,select{
+        display: block;
+    }
+    .log-form{
+        width: fit-content;
+        margin: 10px auto;
+        padding: 50px;
+        background-color: #8bb9fe;
+
+    }
+    .log-form input,.log-form textarea,.log-form button ,.log-form select{
+        width: 100px;
+        margin: 10px;
+        padding: 10px;
+    }
+</style>
+<body>
+
+<form action="" method="get" class="log-form">
+
+    <label id="username" >UserName</label>
+    <input type="text" name="username" placeholder="type your name" required>
+
+    <label id="email">Email</label>
+    <input type="email" name="email" placeholder="type your email" required>
+
+    <label id="password">Password</label>
+    <input type="password" name="password" placeholder="type your password" required>
+
+    <label id="gender">Gender</label>
+    <select name="gender">
+        <option value="male">male</option>
+        <option value="female">female</option>
+    </select>
+    <textarea>Message</textarea>
+    <input type="submit" name="submit">
+</form>
+</body>
+</html>

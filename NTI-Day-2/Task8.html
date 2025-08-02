@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task8</title>
+</head>
+<body>
+<h2>Say hello!</h2>
+<input type="text" id="username" placeholder="Enter your name" oninput="showname()">
+<button onclick="showdegree()"> أظهر نتيجتك </button>
+<p id="output">
+
+</p>
+<p id="data"></p>
+ <script>
+     function showname(){
+         let name = document.getElementById("username").value;
+         document.getElementById("output").innerHTML="مرحبا بك يا "+ name + "!";
+
+     }
+     function showdegree(){
+         let name = document.getElementById("username").value;
+         document.getElementById("output").innerHTML="Hello , "+name+" your grade is 90%";
+     }
+ </script>
+</body>
+</html>
