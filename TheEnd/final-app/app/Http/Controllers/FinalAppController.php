@@ -16,6 +16,15 @@ class FinalAppController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function index1()
+    {
+        $totalArticles = final_app::count();
+        $recentArticles = final_app::latest()->take(5)->get();
+
+        return view('dashboard', compact('totalArticles', 'recentArticles'));
+    }
+
     public function index()
     {
         $articles = final_app::with('user')->latest()->get();

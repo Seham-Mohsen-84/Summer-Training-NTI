@@ -4,13 +4,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FinalAppController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/dashboard', [FinalAppController::class, 'index1'])->name('dashboard');
+
 Route::get('/', fn () => view('welcome'))->name('home');
 Route::get('/articles', [FinalAppController::class, 'index'])->name('articles.index');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [FinalAppController::class, 'index1'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::get('/test', function () {
     return view('test');

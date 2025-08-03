@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <!-- App brand/logo -->
-        <a class="navbar-brand" href="#">Articles App</a>
+        <a class="navbar-brand" href="{{route('dashboard')}}">Articles App</a>
 
         <!-- Mobile menu toggle button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

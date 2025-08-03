@@ -27,7 +27,9 @@
                                                id="name" name="name" value="" required autofocus>
                                     </div>
                                     @error('name')
-                                    <div class="invalid-feedback"></div>
+                                    <div class="invalid-feedback">
+                                        Invalid name please try again
+                                    </div>
                                     @enderror
                                 </div>
 
@@ -39,7 +41,9 @@
                                                id="username" name="username" value="" required>
                                     </div>
                                     @error('username')
-                                    <div class="invalid-feedback"></div>
+                                    <div class="invalid-feedback">
+                                        Invalid user name please try again
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
@@ -52,7 +56,9 @@
                                            id="email" name="email" value="" required>
                                 </div>
                                 @error('email')
-                                <div class="invalid-feedback"></div>
+                                <div class="invalid-feedback">
+                                    Invalid email please try again
+                                </div>
                                 @enderror
                             </div>
 
@@ -64,7 +70,9 @@
                                            id="password" name="password" required>
                                 </div>
                                 @error('password')
-                                <div class="invalid-feedback"></div>
+                                <div class="invalid-feedback">
+                                    Invalid password please try again
+                                </div>
                                 @enderror
                             </div>
 

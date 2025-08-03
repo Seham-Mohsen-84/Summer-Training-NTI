@@ -1,4 +1,5 @@
 <!-- resources/views/dashboard.blade.php -->
+
 @extends('layouts.app')
 
 @section('title', 'Dashboard')
@@ -12,11 +13,11 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h4 class="card-title mb-1">Welcome back, !</h4>
+                                <h4 class="card-title mb-1">Welcome back,{{ Auth::user()->name }}!</h4>
                                 <p class="card-text mb-0">Here's what's happening with your articles today.</p>
                             </div>
                             <div class="text-end">
-                                <h2 class="mb-0"></h2>
+                                <h2 class="mb-0">{{ $totalArticles }}</h2>
                                 <small>Total Articles</small>
                             </div>
                         </div>
@@ -71,7 +72,7 @@
                 <div class="card shadow-sm">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Recent Articles</h5>
-                        <a href="" class="btn btn-primary btn-sm">
+                        <a href="{{route('articles.create')}}" class="btn btn-primary btn-sm">
                             <i class="bi bi-plus-circle me-1"></i>New Article
                         </a>
                     </div>
@@ -80,16 +81,22 @@
                             <div class="d-flex align-items-center py-3 border-bottom">
                                 <div class="flex-shrink-0">
                                     <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                        <i class="bi bi-file-text text-muted"></i>
+                                        <i class="bi bi-file-text text-muted">
+                                            {{$article->title}}
+                                        </i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <h6 class="mb-1"></h6>
-                                    <p class="text-muted mb-0 small"></p>
-                                    <small class="text-muted"></small>
+                                    <p class="text-muted mb-0 small">
+                                        {{$article->body}}
+                                    </p>
+                                    <small class="text-muted">
+                                        By {{$article->user->name}}
+                                    </small>
                                 </div>
                                 <div class="flex-shrink-0">
-                                    <a href="" class="btn btn-outline-primary btn-sm">View</a>
+                                    <a href="{{ route('articles.show',$article) }}" class="btn btn-outline-primary btn-sm">View</a>
                                 </div>
                             </div>
                         @empty
@@ -97,7 +104,7 @@
                                 <i class="bi bi-journal-text display-4 text-muted"></i>
                                 <h5 class="mt-3">No Articles Yet</h5>
                                 <p class="text-muted">Start writing your first article!</p>
-                                <a href="" class="btn btn-primary">Create Article</a>
+                                <a href="{{route('articles.create')}}" class="btn btn-primary">Create Article</a>
                             </div>
                         @endforelse
                     </div>
@@ -110,10 +117,10 @@
                     </div>
                     <div class="card-body">
                         <div class="d-grid gap-2">
-                            <a href="" class="btn btn-primary">
+                            <a href="{{route("articles.create")}}" class="btn btn-primary">
                                 <i class="bi bi-plus-circle me-2"></i>New Article
                             </a>
-                            <a href="" class="btn btn-outline-secondary">
+                            <a href="{{route("articles.index")}}" class="btn btn-outline-secondary">
                                 <i class="bi bi-list me-2"></i>All Articles
                             </a>
                             <a href="#" class="btn btn-outline-info">
