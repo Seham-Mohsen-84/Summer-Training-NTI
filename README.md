@@ -45,7 +45,7 @@ This Laravel app allows users to:
 
 ## 🧰 Tech Stack
 
-- Laravel 10
+- Laravel 12
 - PHP 8.x
 - MySQL
 - Bootstrap 5
